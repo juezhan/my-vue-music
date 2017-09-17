@@ -41,13 +41,13 @@ export const insertSong = function ({commit, state}, song) {
   let currentSong = playlist[currentIndex]
   // 查找当前列表中是或否有要待插入的歌曲并返回其索引
   let fpIndex = findIndex(playlist, song)
-  // 因为插入歌曲，所以索引 + 1
+  // 因为是插入歌曲，所以索引+1
   currentIndex++
-  // 插入这首歌曲到当前索引位置
+  // 插入这首歌到当前索引位置
   playlist.splice(currentIndex, 0, song)
   // 如果已经包含了这首歌
   if (fpIndex > -1) {
-    //  如果当前插入的序号大于列表中的序号
+    // 如果当前插入的序号大于列表中的序号
     if (currentIndex > fpIndex) {
       playlist.splice(fpIndex, 1)
       currentIndex--
@@ -55,9 +55,13 @@ export const insertSong = function ({commit, state}, song) {
       playlist.splice(fpIndex + 1, 1)
     }
   }
+
   let currentSIndex = findIndex(sequenceList, currentSong) + 1
+
   let fsIndex = findIndex(sequenceList, song)
+
   sequenceList.splice(currentSIndex, 0, song)
+
   if (fsIndex > -1) {
     if (currentSIndex > fsIndex) {
       sequenceList.splice(fsIndex, 1)
@@ -65,6 +69,7 @@ export const insertSong = function ({commit, state}, song) {
       sequenceList.splice(fsIndex + 1, 1)
     }
   }
+
   commit(types.SET_PLAYLIST, playlist)
   commit(types.SET_SEQUENCE_LIST, sequenceList)
   commit(types.SET_CURRENT_INDEX, currentIndex)
@@ -95,6 +100,7 @@ export const deleteSong = function ({commit, state}, song) {
   if (currentIndex > pIndex || currentIndex === playlist.length) {
     currentIndex--
   }
+
   commit(types.SET_PLAYLIST, playlist)
   commit(types.SET_SEQUENCE_LIST, sequenceList)
   commit(types.SET_CURRENT_INDEX, currentIndex)
@@ -104,8 +110,8 @@ export const deleteSong = function ({commit, state}, song) {
 }
 
 export const deleteSongList = function ({commit}) {
+  commit(types.SET_CURRENT_INDEX, -1)
   commit(types.SET_PLAYLIST, [])
   commit(types.SET_SEQUENCE_LIST, [])
-  commit(types.SET_CURRENT_INDEX, -1)
   commit(types.SET_PLAYING_STATE, false)
 }
