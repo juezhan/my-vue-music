@@ -7,6 +7,7 @@ import Singer from '../components/singer/singer.vue'
 import SinnderDetail from '../components/singer-detail/singer-detail.vue'
 import Disc from '../components/disc/disc.vue'
 import TopList from '../components/top-list/top-list.vue'
+import UserConter from '../components/user-center/user-center.vue'
 
 Vue.use(Router)
 
@@ -59,6 +60,10 @@ export default new Router({
           component: SinnderDetail
         }
       ]
+    },
+    {
+      path: '/user',
+      component: UserConter
     }
   ]
 })
